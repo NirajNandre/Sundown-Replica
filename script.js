@@ -164,53 +164,6 @@ setTimeout(function(){
     loader.style.top = '-100%';
 },4000)
 
-document.addEventListener("DOMContentLoaded", async function() {
-    // Preload media asynchronously
-    const preloadMedia = async (url) => {
-        return new Promise((resolve, reject) => {
-            if (url.endsWith('.mp4')) {
-                const video = document.createElement('video');
-                video.src = url;
-                video.preload = 'auto';
-                video.onloadeddata = () => resolve();
-                video.onerror = () => reject();
-                document.body.appendChild(video);
-                video.style.display = 'none'; // Hide the preloaded video
-            } else {
-                const img = new Image();
-                img.src = url;
-                img.onload = () => resolve();
-                img.onerror = () => reject();
-            }
-        });
-    };
-
-    const elems = document.querySelectorAll('.elem, #page1-video');
-    const mediaPromises = Array.from(elems).map(elem => {
-        const mediaUrl = elem.getAttribute('data-image');
-        if (mediaUrl) {
-            return preloadMedia(mediaUrl);
-        }
-    });
-
-    try {
-        await Promise.all(mediaPromises);
-        console.log("All media assets preloaded successfully.");
-    } catch (error) {
-        console.error("Error preloading media assets:", error);
-    }
-
-    // Handle custom cursor
-    const swiper = document.querySelector('.swiper');
-
-    swiper.addEventListener('mouseenter', function() {
-        swiper.classList.add('custom-cursor');
-    });
-
-    swiper.addEventListener('mouseleave', function() {
-        swiper.classList.remove('custom-cursor');
-    });
-});
 
 
     swiper.addEventListener('mouseleave', function() {

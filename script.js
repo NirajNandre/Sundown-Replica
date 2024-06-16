@@ -163,6 +163,7 @@ var loader = document.querySelector('#loader');
 setTimeout(function(){
     loader.style.top = '-100%';
 },4000)
+
 document.addEventListener("DOMContentLoaded", async function() {
     // Preload media asynchronously
     const preloadMedia = async (url) => {
@@ -184,7 +185,7 @@ document.addEventListener("DOMContentLoaded", async function() {
         });
     };
 
-    const elems = document.querySelectorAll('.elem');
+    const elems = document.querySelectorAll('.elem, #page1-video');
     const mediaPromises = Array.from(elems).map(elem => {
         const mediaUrl = elem.getAttribute('data-image');
         if (mediaUrl) {
@@ -205,6 +206,12 @@ document.addEventListener("DOMContentLoaded", async function() {
     swiper.addEventListener('mouseenter', function() {
         swiper.classList.add('custom-cursor');
     });
+
+    swiper.addEventListener('mouseleave', function() {
+        swiper.classList.remove('custom-cursor');
+    });
+});
+
 
     swiper.addEventListener('mouseleave', function() {
         swiper.classList.remove('custom-cursor');
